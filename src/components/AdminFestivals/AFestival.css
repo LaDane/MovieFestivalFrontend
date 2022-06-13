@@ -1,0 +1,62 @@
+.afestival-container {
+	position: relative;
+	width: 97%;
+	height: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	/* padding-left: 20px; */
+	/* margin: 50px 0px 30px 0px; */
+	margin: 10px 0px 20px 0px;
+	left: 10px;
+	padding: 10px 0px 5px 0px;
+	background: rgba(255, 239, 208, 0.633);
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.afestival-container-input {
+	position: relative;
+	width: 97%;
+	height: 390px;
+	/* display: flex; */
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	/* padding-left: 20px; */
+	/* margin: 50px 0px 30px 0px; */
+	margin: 10px 0px 20px 0px;
+	left: 10px;
+	padding: 10px 0px 5px 0px;
+	background: rgba(255, 239, 208, 0.633);
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.afestival-item {
+	margin: 10px 20px 10px 20px;
+}
+
+.afestival-input {
+	display: inline;
+	margin-right: 10px;
+	margin-top: 5px;
+	width: 130px;
+}
+
+.afestival-input-btn-container {
+	position: relative;
+	margin-top: 10px;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.afestival-input-btn {
+	position: relative;
+	margin-top: 10px;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}

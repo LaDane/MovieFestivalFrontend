@@ -2,7 +2,7 @@ import React from "react";
 import ShowItem from "./ShowItem";
 import "./Show.css";
 
-const ShowContent = ({ data }) => {
+const ShowContent = ({ data, guestProfile, setGuestProfile, updateGuestShows }) => {
 	return (
 		<>
 			<div className="show-content-container">
@@ -15,18 +15,18 @@ const ShowContent = ({ data }) => {
 				</div>
 
 				{(() => {
-					if (data[0].id !== 0) {
+					if (data.length !== 0 && data[0].id !== 0) {
 						return (
 							<>
 								{data.map((item) => {
-									return <ShowItem key={item.id} item={item} />;
+									return <ShowItem key={item.id} data={data} item={item} guestProfile={guestProfile} setGuestProfile={setGuestProfile} updateGuestShows={updateGuestShows} />;
 								})}
 							</>
 						);
 					} else {
 						return (
 							<>
-								<p>Fetching data</p>
+								<p>No data</p>
 							</>
 						);
 					}

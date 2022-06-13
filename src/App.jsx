@@ -13,17 +13,35 @@ import Admin from "./pages/Admin";
 import User from "./pages/User";
 import Users from "./pages/Users";
 import Shows from "./pages/Shows";
+import Guest from "./pages/Guest";
+import AdminFestival from "./pages/AdminFestival";
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [role, setRole] = useState("");
 	const [username, setUsername] = useState("");
+	const [guestProfile, setGuestProfile] = useState({
+		id: 0,
+		name: "",
+		phone: "",
+		email: "",
+		status: "",
+		showList: [],
+	});
 
 	const logout = () => {
 		facade.logout();
 		setLoggedIn(false);
 		setRole("");
 		setUsername("");
+		setGuestProfile({
+			id: 0,
+			name: "",
+			phone: "",
+			email: "",
+			status: "",
+			showList: [],
+		});
 	};
 
 	return (
@@ -33,14 +51,16 @@ function App() {
 
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/login" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} setRole={setRole} setUsername={setUsername} />} />
+					<Route path="/login" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} setRole={setRole} setUsername={setUsername} setGuestProfile={setGuestProfile} />} />
 					<Route path="/signup" element={<Signup />} />
 
 					<Route path="/admin" element={<Admin />} />
 					<Route path="/user" element={<User />} />
 
 					<Route path="/users" element={<Users role={role} />} />
-					<Route path="/shows" element={<Shows role={role} />} />
+					<Route path="/shows" element={<Shows role={role} guestProfile={guestProfile} setGuestProfile={setGuestProfile} />} />
+					<Route path="/guest" element={<Guest setGuestProfile={setGuestProfile} username={username} />} />
+					<Route path="/adminfestivals" element={<AdminFestival role={role} />} />
 				</Routes>
 			</Router>
 		</div>

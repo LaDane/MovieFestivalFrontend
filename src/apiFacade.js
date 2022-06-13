@@ -49,6 +49,131 @@ function apiFacade() {
             })
     }
 
+    const getGuestShows = (guestId, setGuestShows) => {
+        const options = makeOptions("GET", true);
+        return fetch(URL + `/api/guest/${guestId}/shows`, options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                setGuestShows(res);
+            })
+    }
+
+    const createGuest = (name, phone, email, username, setGuestProfile) => {
+        const options = makeOptions("POST", true, { name: name, phone: phone, email: email, status: "Awaiting approval", showList: [] });
+        return fetch(URL + `/api/guest/create/${username}`, options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                setGuestProfile(res);
+            })
+    }
+
+    const checkGuest = (username, setGuestProfile) => {
+        const options = makeOptions("GET", true);
+        return fetch(URL + `/api/guest/checkguest/${username}`, options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                setGuestProfile(res);
+            })
+    }
+
+    const attendShow = (guestId, showId, setGuestProfile, updateGuestShows) => {
+        const options = makeOptions("GET", true);
+        return fetch(URL + `/api/guest/${guestId}/show/${showId}`, options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                console.log(res);
+                setGuestProfile(res);
+                updateGuestShows();
+            })
+    }
+
+    const getFestivals = (setFestivals) => {
+        const options = makeOptions("GET", true);
+        return fetch(URL + "/api/festival/all", options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                setFestivals(res);
+                console.log(res)
+            })
+    }
+
+    const createFestival = (setFestivals, name, city, startYear, startMonth, startDay, startHour, startMin, endYear, endMonth, endDay, endHour, endMin) => {
+        const options = makeOptions("POST", true, {
+            name: name,
+            city: city,
+            startDateTime: {
+                date: {
+                    year: startYear,
+                    month: startMonth,
+                    day: startDay
+                },
+                time: {
+                    hour: startHour,
+                    minute: startMin,
+                    second: 0,
+                    nano: 0
+                }
+            },
+            endDateTime: {
+                date: {
+                    year: endYear,
+                    month: endMonth,
+                    day: endDay
+                },
+                time: {
+                    hour: endHour,
+                    minute: endMin,
+                    second: 0,
+                    nano: 0
+                }
+            }
+        })
+        return fetch(URL + `/api/festival/create`, options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                getFestivals(setFestivals);
+            })
+    }
+
+    const updateFestival = (setFestivals, id, name, city, startYear, startMonth, startDay, startHour, startMin, endYear, endMonth, endDay, endHour, endMin) => {
+        const options = makeOptions("PUT", true, {
+            id: id,
+            name: name,
+            city: city,
+            startDateTime: {
+                date: {
+                    year: startYear,
+                    month: startMonth,
+                    day: startDay
+                },
+                time: {
+                    hour: startHour,
+                    minute: startMin,
+                    second: 0,
+                    nano: 0
+                }
+            },
+            endDateTime: {
+                date: {
+                    year: endYear,
+                    month: endMonth,
+                    day: endDay
+                },
+                time: {
+                    hour: endHour,
+                    minute: endMin,
+                    second: 0,
+                    nano: 0
+                }
+            }
+        })
+        return fetch(URL + `/api/festival/${id}`, options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                getFestivals(setFestivals);
+            })
+    }
+
     const fetchUserData = (role) => {
         const options = makeOptions("GET", true); //True add's the token
         return fetch(URL + `/api/info/${role}`, options).then(handleHttpErrors);
@@ -98,7 +223,14 @@ function apiFacade() {
         signup,
         logout,
         getAllUsers,
-        getAllShows
+        getAllShows,
+        getGuestShows,
+        createGuest,
+        checkGuest,
+        attendShow,
+        getFestivals,
+        createFestival,
+        updateFestival,
     }
 }
 

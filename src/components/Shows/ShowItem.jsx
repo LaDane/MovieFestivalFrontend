@@ -1,11 +1,25 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import facade from "../../apiFacade";
 
-const ShowItem = ({ item }) => {
-	const onClick = (evt, id) => {
+const ShowItem = ({ data, item, guestProfile, setGuestProfile, updateGuestShows }) => {
+	// const onClick = (evt, id) => {
+	// 	evt.preventDefault();
+	// 	console.log(id);
+	// 	// navigate("/character-sheet");
+	// };
+
+	const onClickAttend = (evt, id) => {
 		evt.preventDefault();
-		console.log(id);
-		// navigate("/character-sheet");
+		facade.attendShow(guestProfile.id, id, setGuestProfile, updateGuestShows);
 	};
+
+	const onClickGuestProfile = (evt) => {
+		evt.preventDefault();
+		navigate("/guest");
+	};
+
+	const navigate = useNavigate();
 
 	return (
 		<>
@@ -26,16 +40,43 @@ const ShowItem = ({ item }) => {
 				</p>
 				<p className="show-item-attending">{item.guestList.length}</p>
 
-				<div className="show-item-btn-container">
-					<button
-						className="show-item-btn"
-						onClick={(e) => {
-							onClick(e, item.id);
-						}}
-					>
-						Attend Show
-					</button>
-				</div>
+				{(() => {
+					if (guestProfile === "" || guestProfile === null || guestProfile.id === 0) {
+						return (
+							<>
+								<div className="show-item-btn-container">
+									<button
+										className="show-item-btn"
+										onClick={(e) => {
+											onClickGuestProfile(e);
+										}}
+									>
+										Create Guest Profile
+									</button>
+								</div>
+							</>
+						);
+					}
+					// else if (data.filter((e) => e.id === item.id).length > 0) {
+					// 	<p>here</p>;
+					// }
+					else {
+						return (
+							<>
+								<div className="show-item-btn-container">
+									<button
+										className="show-item-btn"
+										onClick={(e) => {
+											onClickAttend(e, item.id);
+										}}
+									>
+										Attend Show
+									</button>
+								</div>
+							</>
+						);
+					}
+				})()}
 			</div>
 		</>
 	);

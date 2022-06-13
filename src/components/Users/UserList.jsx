@@ -1,5 +1,6 @@
 import React from "react";
 import UserElement from "./UserElement";
+import "./Users.css";
 
 const UserList = ({ allUsers }) => {
 	return (

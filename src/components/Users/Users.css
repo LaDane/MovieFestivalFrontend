@@ -1,0 +1,14 @@
+.user-element-container {
+	position: relative;
+	width: 80%;
+	/* display: flex; */
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin: 20px 100px 50px 100px;
+	/* left: 10px; */
+	padding: 10px 0px 5px 0px;
+	background: rgba(255, 239, 208, 0.633);
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}

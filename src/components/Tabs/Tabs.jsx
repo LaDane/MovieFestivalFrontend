@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Tabs.css";
 
-const Tabs = ({ tabButtons, tabContent }) => {
+const Tabs = ({ tabButtons, tabContent, guestProfile, setGuestProfile, updateGuestShows }) => {
 	const [toggleState, setToggleState] = useState(1);
 
 	const toggleTab = (index) => {
@@ -26,7 +26,7 @@ const Tabs = ({ tabButtons, tabContent }) => {
 					{tabContent.content.map((content) => {
 						return (
 							<div key={content.state} className={toggleState === content.state ? "content-tab active-content-tab" : "content-tab"}>
-								<content.comp data={content.data} />
+								<content.comp data={content.data} guestProfile={guestProfile} setGuestProfile={setGuestProfile} updateGuestShows={updateGuestShows} />
 							</div>
 						);
 					})}

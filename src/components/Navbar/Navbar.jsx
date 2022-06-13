@@ -40,6 +40,9 @@ const Navbar = ({ role, logout }) => {
 								<NavLink to="/users" activestyle="true">
 									Users
 								</NavLink>
+								<NavLink to="/adminfestivals" activestyle="true">
+									Festivals
+								</NavLink>
 							</NavMenu>
 							<NavBtn>
 								<NavBtnLink to="/" onClick={logout}>
