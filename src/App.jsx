@@ -11,6 +11,8 @@ import Signup from "./pages/Signup";
 
 import Admin from "./pages/Admin";
 import User from "./pages/User";
+import Users from "./pages/Users";
+import Shows from "./pages/Shows";
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -36,6 +38,9 @@ function App() {
 
 					<Route path="/admin" element={<Admin />} />
 					<Route path="/user" element={<User />} />
+
+					<Route path="/users" element={<Users role={role} />} />
+					<Route path="/shows" element={<Shows role={role} />} />
 				</Routes>
 			</Router>
 		</div>

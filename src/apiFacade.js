@@ -1,4 +1,5 @@
-const URL = "http://localhost:8080/devops_starter_war_exploded";
+// const URL = "https://alekw.dk/moviefestivalbackend";
+const URL = "http://localhost:8080/MovieFestivalBackend_war_exploded";
 
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -30,6 +31,24 @@ function apiFacade() {
             })
     }
 
+    const getAllUsers = (setAllUsers) => {
+        const options = makeOptions("GET", true);
+        return fetch(URL + "/api/user/users", options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                setAllUsers(res);
+            })
+    }
+
+    const getAllShows = (setAllShows) => {
+        const options = makeOptions("GET", true);
+        return fetch(URL + "/api/show/all", options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                setAllShows(res);
+            })
+    }
+
     const fetchUserData = (role) => {
         const options = makeOptions("GET", true); //True add's the token
         return fetch(URL + `/api/info/${role}`, options).then(handleHttpErrors);
@@ -50,6 +69,7 @@ function apiFacade() {
 
     const logout = () => {
         localStorage.removeItem("jwtToken");
+        // localStorage.clear();
     }
 
     const makeOptions = (method, addToken, body) => {
@@ -73,10 +93,12 @@ function apiFacade() {
         setToken,
         getToken,
         loggedIn,
+        fetchUserData,
         login,
         signup,
         logout,
-        fetchUserData
+        getAllUsers,
+        getAllShows
     }
 }
 
