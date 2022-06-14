@@ -2,9 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import facade from "../apiFacade";
-import UserList from "../components/Users/UserList";
+import UserElement from "../components/AdminUsers/UserElement";
+import "../components/AdminUsers/Users.css";
 
-const Users = ({ role }) => {
+const AdminUser = ({ role }) => {
 	const [allUsers, setAllUsers] = useState({
 		users: [
 			{
@@ -27,7 +28,21 @@ const Users = ({ role }) => {
 		<>
 			{(() => {
 				if (role === "admin") {
-					return <UserList allUsers={allUsers} />;
+					return (
+						<>
+							<div className="user-list-container">
+								<div className="user-list-wrapper">
+									{allUsers.users.map((user) => {
+										return (
+											<div key={user.id} className="user-list-element">
+												<UserElement user={user} setAllUsers={setAllUsers} />
+											</div>
+										);
+									})}
+								</div>
+							</div>
+						</>
+					);
 				} else {
 					return (
 						<>
@@ -40,4 +55,4 @@ const Users = ({ role }) => {
 	);
 };
 
-export default Users;
+export default AdminUser;

@@ -11,10 +11,12 @@ import Signup from "./pages/Signup";
 
 import Admin from "./pages/Admin";
 import User from "./pages/User";
-import Users from "./pages/Users";
+import Users from "./pages/AdminUser";
 import Shows from "./pages/Shows";
 import Guest from "./pages/Guest";
 import AdminFestival from "./pages/AdminFestival";
+import AdminShow from "./pages/AdminShow";
+import AdminUser from "./pages/AdminUser";
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -57,10 +59,11 @@ function App() {
 					<Route path="/admin" element={<Admin />} />
 					<Route path="/user" element={<User />} />
 
-					<Route path="/users" element={<Users role={role} />} />
 					<Route path="/shows" element={<Shows role={role} guestProfile={guestProfile} setGuestProfile={setGuestProfile} />} />
 					<Route path="/guest" element={<Guest setGuestProfile={setGuestProfile} username={username} />} />
+					<Route path="/adminusers" element={<AdminUser role={role} />} />
 					<Route path="/adminfestivals" element={<AdminFestival role={role} />} />
+					<Route path="/adminshows" element={<AdminShow role={role} />} />
 				</Routes>
 			</Router>
 		</div>

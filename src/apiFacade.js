@@ -18,7 +18,6 @@ function apiFacade() {
             .then(res => {
                 setResponseText(res.msg);
                 setToken(res.token);
-                console.log(res.msg);
             })
     }
 
@@ -58,6 +57,98 @@ function apiFacade() {
             })
     }
 
+    const updateShow = (setShows, id, name, location, startYear, startMonth, startDay, startHour, startMin, endYear, endMonth, endDay, endHour, endMin, festivalId) => {
+        const options = makeOptions("PUT", true, {
+            id: 1,
+            name: name,
+            location: location,
+            startDateTime: {
+                date: {
+                    year: startYear,
+                    month: startMonth,
+                    day: startDay
+                },
+                time: {
+                    hour: startHour,
+                    minute: startMin,
+                    second: 0,
+                    nano: 0
+                }
+            },
+            endDateTime: {
+                date: {
+                    year: endYear,
+                    month: endMonth,
+                    day: endDay
+                },
+                time: {
+                    hour: endHour,
+                    minute: endMin,
+                    second: 0,
+                    nano: 0
+                }
+            },
+            guestList: [
+
+            ],
+        });
+        return fetch(URL + `/api/show/${id}/festival/${festivalId}`, options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                getAllShows(setShows)
+            })
+    }
+
+    const deleteShow = (setShows, showId) => {
+        const options = makeOptions("DELETE", true);
+        return fetch(URL + `/api/show/${showId}`, options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                getAllShows(setShows)
+            })
+    }
+
+    const createShow = (setShows, name, location, startYear, startMonth, startDay, startHour, startMin, endYear, endMonth, endDay, endHour, endMin, festivalId) => {
+        const options = makeOptions("POST", true, {
+            id: 1,
+            name: name,
+            location: location,
+            startDateTime: {
+                date: {
+                    year: startYear,
+                    month: startMonth,
+                    day: startDay
+                },
+                time: {
+                    hour: startHour,
+                    minute: startMin,
+                    second: 0,
+                    nano: 0
+                }
+            },
+            endDateTime: {
+                date: {
+                    year: endYear,
+                    month: endMonth,
+                    day: endDay
+                },
+                time: {
+                    hour: endHour,
+                    minute: endMin,
+                    second: 0,
+                    nano: 0
+                }
+            },
+            guestList: [],
+            festival: {}
+        })
+        return fetch(URL + `/api/show/create/festival/${festivalId}`, options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                getAllShows(setShows)
+            })
+    }
+
     const createGuest = (name, phone, email, username, setGuestProfile) => {
         const options = makeOptions("POST", true, { name: name, phone: phone, email: email, status: "Awaiting approval", showList: [] });
         return fetch(URL + `/api/guest/create/${username}`, options)
@@ -76,12 +167,27 @@ function apiFacade() {
             })
     }
 
+    const updateGuest = (setAllUsers, id, name, phone, email, status, festivalId) => {
+        const options = makeOptions("PUT", true, {
+            id: id,
+            name: name,
+            phone: phone,
+            email: email,
+            status: status,
+            showList: []
+        });
+        return fetch(URL + `/api/guest/${id}/festival/${festivalId}`, options)
+            .then(handleHttpErrors)
+            .then((res) => {
+                getAllUsers(setAllUsers);
+            })
+    }
+
     const attendShow = (guestId, showId, setGuestProfile, updateGuestShows) => {
         const options = makeOptions("GET", true);
         return fetch(URL + `/api/guest/${guestId}/show/${showId}`, options)
             .then(handleHttpErrors)
             .then((res) => {
-                console.log(res);
                 setGuestProfile(res);
                 updateGuestShows();
             })
@@ -93,7 +199,6 @@ function apiFacade() {
             .then(handleHttpErrors)
             .then((res) => {
                 setFestivals(res);
-                console.log(res)
             })
     }
 
@@ -225,8 +330,12 @@ function apiFacade() {
         getAllUsers,
         getAllShows,
         getGuestShows,
+        updateShow,
+        deleteShow,
+        createShow,
         createGuest,
         checkGuest,
+        updateGuest,
         attendShow,
         getFestivals,
         createFestival,

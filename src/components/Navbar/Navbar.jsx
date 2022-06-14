@@ -34,14 +34,17 @@ const Navbar = ({ role, logout }) => {
 								<img className="logo-img" src={require("../../images/app-logo.png")} alt="Logo" />
 							</NavLink>
 							<NavMenu>
-								<NavLink to="/admin" activestyle="true">
+								{/* <NavLink to="/admin" activestyle="true">
 									Admin
-								</NavLink>
-								<NavLink to="/users" activestyle="true">
+								</NavLink> */}
+								<NavLink to="/adminusers" activestyle="true">
 									Users
 								</NavLink>
 								<NavLink to="/adminfestivals" activestyle="true">
 									Festivals
+								</NavLink>
+								<NavLink to="/adminshows" activestyle="true">
+									Shows
 								</NavLink>
 							</NavMenu>
 							<NavBtn>
