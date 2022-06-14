@@ -1,5 +1,5 @@
-// const URL = "https://alekw.dk/moviefestivalbackend";
-const URL = "http://localhost:8080/MovieFestivalBackend_war_exploded";
+const URL = "https://alekw.dk/moviefestivalbackend";
+// const URL = "http://localhost:8080/MovieFestivalBackend_war_exploded";
 
 function handleHttpErrors(res) {
     if (!res.ok) {
